@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const Albums = () => {
+const FeedScreen = () => {
   return (
     <View>
-      <Text>Albums</Text>
+      <Text>FeedScreen</Text>
     </View>
   );
 };
 
-export default Albums;
+export default FeedScreen;
