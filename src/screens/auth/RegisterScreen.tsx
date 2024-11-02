@@ -24,7 +24,7 @@ const RegisterScreen = () => {
   const handleRegister = () => {};
 
   return (
-    <LinearGradient colors={["#5614B0", "#DBD65C"]} style={styles.background}>
+    <View style={styles.background}>
       <View style={styles.container}>
         <Text style={styles.title}>Create Account</Text>
         <Text style={styles.subtitle}>Please fill in the details</Text>
@@ -54,7 +54,7 @@ const RegisterScreen = () => {
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
       </View>
-    </LinearGradient>
+    </View>
   );
 };
 

@@ -29,7 +29,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <LinearGradient colors={["#5614B0", "#DBD65C"]} style={styles.background}>
+    <View style={styles.background}>
       <View style={styles.container}>
         <Text style={styles.title}>Welcome Back</Text>
         <Text style={styles.subtitle}>Please login to your account</Text>
@@ -52,7 +52,7 @@ const LoginScreen = () => {
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
-    </LinearGradient>
+    </View>
   );
 };
 

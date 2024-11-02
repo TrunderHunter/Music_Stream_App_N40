@@ -6,8 +6,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
-const IntroScreen = () => {
+type Props = {
+  navigation: any;
+};
+
+const IntroScreen = ({ navigation }: Props) => {
   return (
     <View>
       <ImageBackground
@@ -56,7 +63,9 @@ const IntroScreen = () => {
             width: "80%",
             alignItems: "center",
           }}
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate("Register");
+          }}
         >
           <Text
             style={{
@@ -78,7 +87,7 @@ const IntroScreen = () => {
             borderRadius: 99,
           }}
           onPress={() => {
-            // Move to Home screen
+            navigation.navigate("Login");
           }}
         >
           <Text
