@@ -14,7 +14,11 @@ const MainNavigator = () => {
   return (
     <>
       {isLoggedIn ? (
-        <Tab.Navigator>
+        <Tab.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           <Tab.Screen name="Home" component={HomeNavigator} />
           <Tab.Screen name="Search" component={FeedScreen} />
           <Tab.Screen name="Feed" component={FeedScreen} />
