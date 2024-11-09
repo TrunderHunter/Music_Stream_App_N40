@@ -49,39 +49,36 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
       image:
         "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731123882/suuget03_ne4d6e.jpg",
     },
-    {
-      id: "4",
-      title: "Reflection",
-      artist: "Christina Aguilera",
-      image:
-        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731122493/singer01_ldq1tv.jpg",
-    },
-    {
-      id: "5",
-      title: "In The Stars",
-      artist: "Benson Boone",
-      image:
-        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731122808/suuget02_asuc7b.jpg",
-    },
-    {
-      id: "6",
-      title: "The Best of Me",
-      artist: "David Foster",
-      image:
-        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731123882/suuget03_ne4d6e.jpg",
-    },
   ];
 
   const charts = [
     {
       id: "1",
-      title: "Top 50 Canada",
+      title: "Top 50",
+      subtitle: "Canada",
       description: "Daily chart-toppers update",
+      uri: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731126342/ReactNative_MusicApp/Charts/charts01_vpxica.jpg",
     },
     {
       id: "2",
-      title: "Top 50 Global",
+      title: "Top 50",
+      subtitle: "Global",
       description: "Daily chart-toppers update",
+      uri: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731126441/ReactNative_MusicApp/Charts/charts04_de0htv.jpg",
+    },
+    {
+      id: "3",
+      title: "Top 50",
+      subtitle: "USA",
+      description: "Daily chart-toppers update",
+      uri: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731126442/ReactNative_MusicApp/Charts/charts03_kuspgo.jpg",
+    },
+    {
+      id: "4",
+      title: "Top 50",
+      subtitle: "UK",
+      description: "Daily chart-toppers update",
+      uri: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731126443/ReactNative_MusicApp/Charts/charts02_mfq0hj.jpg",
     },
   ];
 
@@ -128,6 +125,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
         <FlatList
           data={suggestions}
           horizontal
+          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <ImageBackground
               source={{ uri: item.image }}
@@ -148,9 +146,16 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
         <FlatList
           data={charts}
           horizontal
+          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View style={styles.chartCard}>
-              <Text style={styles.chartTitle}>{item.title}</Text>
+              <ImageBackground
+                source={{ uri: item.uri }}
+                style={styles.chartImageBackground}
+              >
+                <Text style={styles.chartTitle}>{item.title}</Text>
+                <Text style={styles.chartSubtitle}>{item.subtitle}</Text>
+              </ImageBackground>
               <Text style={styles.chartDescription}>{item.description}</Text>
             </View>
           )}
@@ -225,13 +230,22 @@ const styles = StyleSheet.create({
   },
   chartCard: {
     width: 120,
-    padding: 10,
-    backgroundColor: "#eef",
-    borderRadius: 8,
     marginRight: 10,
   },
-  chartTitle: { fontWeight: "bold" },
-  chartDescription: { color: "#555" },
+  chartImageBackground: {
+    width: 120,
+    height: 120,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 5,
+  },
+  chartSubtitle: { color: "#fff" },
+  chartTitle: { fontWeight: "bold", color: "#fff" },
+  chartDescription: {
+    color: "#555",
+    textAlign: "justify",
+  },
   albumCard: { width: 150, marginRight: 10 },
   albumImage: { width: "100%", height: 100, borderRadius: 8 },
   albumTitle: { fontWeight: "bold" },
