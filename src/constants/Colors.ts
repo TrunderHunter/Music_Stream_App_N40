@@ -27,4 +27,8 @@ export const Colors = {
     light: "#44bcd8",
     dark: "#0a7ea4",
   },
+  gray: {
+    light: "#687076",
+    dark: "#9BA1A6",
+  },
 };
