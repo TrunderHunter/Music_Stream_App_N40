@@ -83,22 +83,66 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
   ];
 
   const albums = [
-    { id: "1", title: "ME", artist: "Jessica Gonzalez", image: "url-to-image" },
+    {
+      id: "1",
+      title: "ME",
+      artist: "Jessica Gonzalez",
+      image:
+        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731285166/ReactNative_MusicApp/TrendingAlbums/trend01_grcujf.png",
+    },
     {
       id: "2",
       title: "Magna Nost",
       artist: "Brian Thomas",
-      image: "url-to-image",
+      image:
+        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731285166/ReactNative_MusicApp/TrendingAlbums/trend02_z6aphj.png",
+    },
+    {
+      id: "3",
+      title: "The Best of Me",
+      artist: "David Foster",
+      image:
+        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731285165/ReactNative_MusicApp/TrendingAlbums/trend03_lvnknj.png",
     },
   ];
 
   const artists = [
-    { id: "1", name: "Jennifer Wilson", image: "url-to-image" },
-    { id: "2", name: "Elizabeth Hall", image: "url-to-image" },
-    { id: "3", name: "Elizabeth Hall", image: "url-to-image" },
-    { id: "4", name: "Elizabeth Hall", image: "url-to-image" },
-    { id: "5", name: "Elizabeth Hall", image: "url-to-image" },
-    { id: "6", name: "Elizabeth Hall", image: "url-to-image" },
+    {
+      id: "1",
+      name: "Jennifer Wilson",
+      image:
+        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731285423/ReactNative_MusicApp/PopularArtists/Image_39_aph9l7.png",
+    },
+    {
+      id: "2",
+      name: "Elizabeth Hall",
+      image:
+        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731285423/ReactNative_MusicApp/PopularArtists/Image_40_uet8uc.png",
+    },
+    {
+      id: "3",
+      name: "Elizabeth Hall",
+      image:
+        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731285423/ReactNative_MusicApp/PopularArtists/Image_41_ly5ydy.png",
+    },
+    {
+      id: "4",
+      name: "Sabrina Carpenter",
+      image:
+        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731285651/ReactNative_MusicApp/PopularArtists/SabrinaCarpenter.png",
+    },
+    {
+      id: "5",
+      name: "Taylor Swift",
+      image:
+        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731285903/ReactNative_MusicApp/PopularArtists/taylor-swift-photo-phone-wallpaper-hd-uhdpaper.com-609_2_a_lrjpcm.jpg",
+    },
+    {
+      id: "6",
+      name: "Lil Nas X",
+      image:
+        "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731286006/ReactNative_MusicApp/PopularArtists/lil-nas-x-met-gala-2024-singer-phone-wallpaper-hd-uhdpaper.com-864_3_a_mv3pqo.jpg",
+    },
   ];
 
   return (
@@ -167,6 +211,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
         <FlatList
           data={albums}
           horizontal
+          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View style={styles.albumCard}>
               <Image source={{ uri: item.image }} style={styles.albumImage} />
@@ -182,6 +227,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
         <FlatList
           data={artists}
           horizontal
+          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View style={styles.artistCard}>
               <Image source={{ uri: item.image }} style={styles.artistImage} />
@@ -230,7 +276,7 @@ const styles = StyleSheet.create({
   },
   chartCard: {
     width: 120,
-    marginRight: 10,
+    marginRight: 14,
   },
   chartImageBackground: {
     width: 120,
@@ -246,12 +292,12 @@ const styles = StyleSheet.create({
     color: "#555",
     textAlign: "justify",
   },
-  albumCard: { width: 150, marginRight: 10 },
-  albumImage: { width: "100%", height: 100, borderRadius: 8 },
+  albumCard: { width: 120, marginRight: 14 },
+  albumImage: { width: 120, height: 120, borderRadius: 8 },
   albumTitle: { fontWeight: "bold" },
   albumArtist: { color: "#888" },
-  artistCard: { alignItems: "center", marginRight: 10, marginBottom: 30 },
-  artistImage: { width: 80, height: 80, borderRadius: 40 },
+  artistCard: { alignItems: "center", marginRight: 14, marginBottom: 30 },
+  artistImage: { width: 120, height: 120, borderRadius: 99 },
   artistName: { marginTop: 5 },
   followButton: {
     backgroundColor: "#333",
