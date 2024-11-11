@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import {
   setSong,
   setPlaylist,
+  playRandomSong,
 } from "../redux/features/currentSong/currentSongSlice";
 import CurrentSong from "../components/CurrentSong";
 
@@ -107,6 +108,16 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
   }) => {
     dispatch(setPlaylist(songList));
     dispatch(setSong(song));
+  };
+
+  const handleRandomPress = () => {
+    dispatch(setPlaylist(songList));
+    dispatch(playRandomSong());
+  };
+
+  const handlePlayPress = () => {
+    dispatch(setPlaylist(songList));
+    dispatch(setSong(songList[0]));
   };
 
   const formatNumberOfListen = (numberOfListen: number) => {
@@ -199,8 +210,12 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
         </View>
 
         <View style={styles.buttonPlayRight}>
-          <FontAwesome name="random" size={24} color="gray" />
-          <AntDesign name="play" size={58} color="black" />
+          <TouchableOpacity onPress={handleRandomPress}>
+            <FontAwesome name="random" size={24} color="gray" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handlePlayPress}>
+            <AntDesign name="play" size={58} color="black" />
+          </TouchableOpacity>
         </View>
       </View>
 

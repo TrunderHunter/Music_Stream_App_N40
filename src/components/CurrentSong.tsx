@@ -118,7 +118,7 @@ const CurrentSong = () => {
       {/* Modal */}
       <Modal
         animationType="slide"
-        transparent={true} // Change to false for full screen
+        transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >
