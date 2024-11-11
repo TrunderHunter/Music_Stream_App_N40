@@ -5,6 +5,7 @@ import FeedScreen from "../screens/FeedScreen";
 import AuthNavigator from "./AuthNavigator";
 import { useSelector } from "react-redux";
 import LibraryScreen from "../screens/LibraryScreen";
+import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
 
 const MainNavigator = () => {
   const isLoggedIn = useSelector(
@@ -19,10 +20,42 @@ const MainNavigator = () => {
             headerShown: false,
           }}
         >
-          <Tab.Screen name="Home" component={HomeNavigator} />
-          <Tab.Screen name="Search" component={FeedScreen} />
-          <Tab.Screen name="Feed" component={FeedScreen} />
-          <Tab.Screen name="Library" component={LibraryScreen} />
+          <Tab.Screen
+            name="Home"
+            component={HomeNavigator}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <AntDesign name="home" size={24} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Search"
+            component={FeedScreen}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <AntDesign name="search1" size={24} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Feed"
+            component={FeedScreen}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <MaterialIcons name="library-music" size={24} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Library"
+            component={LibraryScreen}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Ionicons name="library-outline" size={24} color={color} />
+              ),
+            }}
+          />
         </Tab.Navigator>
       ) : (
         <AuthNavigator />
