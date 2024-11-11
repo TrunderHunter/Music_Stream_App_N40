@@ -23,8 +23,16 @@ interface HomeScreenProps {
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const dispatch = useDispatch();
 
-  const handleSelectAlbum = () => {
-    navigation.navigate("Albums");
+  const handleSelectAlbum = (playList: {
+    id: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    uri: string;
+  }) => {
+    navigation.navigate("Albums", {
+      playList: playList,
+    });
   };
 
   const suggestions = [
@@ -192,7 +200,10 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
           horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View style={styles.chartCard}>
+            <View
+              style={styles.chartCard}
+              onTouchEnd={() => handleSelectAlbum(item)}
+            >
               <ImageBackground
                 source={{ uri: item.uri }}
                 style={styles.chartImageBackground}
