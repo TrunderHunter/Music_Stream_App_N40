@@ -15,6 +15,7 @@ import { logout } from "../../redux/features/auth/authSlice";
 import Header from "../../components/Header";
 import { Colors } from "../../constants/Colors";
 import { AntDesign } from "@expo/vector-icons";
+import CurrentSong from "../../components/CurrentSong";
 
 interface HomeScreenProps {
   navigation: any;
@@ -251,6 +252,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
           keyExtractor={(item) => item.id}
         />
       </ScrollView>
+      <CurrentSong />
     </View>
   );
 };

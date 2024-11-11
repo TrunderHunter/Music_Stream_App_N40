@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, Image, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import {
   Ionicons,
@@ -9,6 +16,9 @@ import {
   AntDesign,
   Feather,
 } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import { setSong } from "../redux/features/currentSong/currentSongSlice";
+import CurrentSong from "../components/CurrentSong";
 
 import { NavigationProp, RouteProp } from "@react-navigation/native";
 
@@ -30,6 +40,7 @@ type AlbumsScreenProps = {
 };
 
 const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
+  const dispatch = useDispatch();
   const { playList } = route.params;
 
   const songList = [
@@ -37,7 +48,7 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
       id: 1,
       title: "FLOWER",
       artist: "Jessica Gonzalez",
-      duration: "03:45",
+      duration: 216,
       numberOfListen: 2100000,
       img: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731293869/ReactNative_MusicApp/PlayList/My%20Library/Image_101_xediif.png",
     },
@@ -45,7 +56,7 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
       id: 2,
       title: "Shape of You",
       artist: "Ed Sheeran",
-      duration: "03:35",
+      duration: 215,
       numberOfListen: 68000000,
       img: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731293865/ReactNative_MusicApp/PlayList/My%20Library/Image_102_rqmime.png",
     },
@@ -53,7 +64,7 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
       id: 3,
       title: "Blinding Lights",
       artist: "Brian Baliey",
-      duration: "04:39",
+      duration: 279,
       numberOfListen: 93000000,
       img: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731293867/ReactNative_MusicApp/PlayList/My%20Library/Image_103_tpof2j.png",
     },
@@ -61,7 +72,7 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
       id: 4,
       title: "Levitating",
       artist: "Anthony Taylor",
-      duration: "04:39",
+      duration: 823,
       numberOfListen: 9000000,
       img: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731293865/ReactNative_MusicApp/PlayList/My%20Library/Image_104_owz7bu.png",
     },
@@ -69,7 +80,7 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
       id: 5,
       title: "Astronaut In The Ocean",
       artist: "Pedro Moreno",
-      duration: "04:39",
+      duration: 216,
       numberOfListen: 23000000,
       img: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731293866/ReactNative_MusicApp/PlayList/My%20Library/Image_105_bwr9tc.png",
     },
@@ -77,7 +88,7 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
       id: 6,
       title: "Dynamite",
       artist: "Elena Jimenez",
-      duration: "04:39",
+      duration: 396,
       numberOfListen: 10000000,
       img: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731293865/ReactNative_MusicApp/PlayList/My%20Library/Image_106_wvfn6t.png",
     },
@@ -85,7 +96,7 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
       id: 7,
       title: "Blinding Lights",
       artist: "Brian Baliey",
-      duration: "04:39",
+      duration: 400,
       numberOfListen: 93000000,
       img: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731293867/ReactNative_MusicApp/PlayList/My%20Library/Image_103_tpof2j.png",
     },
@@ -99,6 +110,12 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
     } else {
       return numberOfListen.toString();
     }
+  };
+
+  const formatNumberOfDuration = (duration: number) => {
+    return `${Math.floor(duration / 60)}:${(duration % 60)
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   return (
@@ -186,7 +203,7 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View
+          <TouchableOpacity
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
@@ -194,6 +211,7 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
               borderBottomWidth: 1,
               borderBottomColor: "#f5f5f5",
             }}
+            onPress={() => dispatch(setSong(item))}
           >
             <View
               style={{
@@ -249,7 +267,7 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
                       marginLeft: -8,
                     }}
                   >
-                    {item.duration}
+                    {formatNumberOfDuration(item.duration)}
                   </Text>
                 </View>
               </View>
@@ -263,9 +281,11 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
             >
               <Entypo name="dots-three-horizontal" size={24} color="gray" />
             </View>
-          </View>
+          </TouchableOpacity>
         )}
       />
+      {/* <View style={{ height: 220 }}></View> */}
+      <CurrentSong />
     </View>
   );
 };
@@ -279,6 +299,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     justifyContent: "flex-start",
     paddingHorizontal: 16,
+    position: "relative",
   },
   header: {
     flexDirection: "row",
