@@ -17,7 +17,10 @@ import {
   Feather,
 } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
-import { setSong } from "../redux/features/currentSong/currentSongSlice";
+import {
+  setSong,
+  setPlaylist,
+} from "../redux/features/currentSong/currentSongSlice";
 import CurrentSong from "../components/CurrentSong";
 
 import { NavigationProp, RouteProp } from "@react-navigation/native";
@@ -92,15 +95,19 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
       numberOfListen: 10000000,
       img: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731293865/ReactNative_MusicApp/PlayList/My%20Library/Image_106_wvfn6t.png",
     },
-    {
-      id: 7,
-      title: "Blinding Lights",
-      artist: "Brian Baliey",
-      duration: 400,
-      numberOfListen: 93000000,
-      img: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731293867/ReactNative_MusicApp/PlayList/My%20Library/Image_103_tpof2j.png",
-    },
   ];
+
+  const handleSongPress = (song: {
+    id: number;
+    title: string;
+    artist: string;
+    duration: number;
+    numberOfListen: number;
+    img: string;
+  }) => {
+    dispatch(setPlaylist(songList));
+    dispatch(setSong(song));
+  };
 
   const formatNumberOfListen = (numberOfListen: number) => {
     if (numberOfListen >= 1000000) {
@@ -211,7 +218,7 @@ const AlbumsScreen = ({ route, navigation }: AlbumsScreenProps) => {
               borderBottomWidth: 1,
               borderBottomColor: "#f5f5f5",
             }}
-            onPress={() => dispatch(setSong(item))}
+            onPress={() => handleSongPress(item)}
           >
             <View
               style={{
