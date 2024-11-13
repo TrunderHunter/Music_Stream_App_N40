@@ -23,8 +23,9 @@ import {
   nextSong,
   prevSong,
   playRandomSong,
+  setCurrentTime,
 } from "../redux/features/currentSong/currentSongSlice";
-
+import Svg, { Path } from "react-native-svg";
 const CurrentSong = () => {
   const dispatch = useDispatch();
   const { song, isPlaying, currentTime } = useSelector(
@@ -65,6 +66,18 @@ const CurrentSong = () => {
 
   const handleRandom = () => {
     dispatch(playRandomSong());
+  };
+
+  const handleRewind = (event: { nativeEvent: { locationX: any } }) => {
+    const { locationX } = event.nativeEvent;
+    const newTime = Math.round((locationX / 400) * song.duration);
+    dispatch(setCurrentTime(newTime));
+  };
+
+  const handleDrag = (event: { nativeEvent: { locationX: any } }) => {
+    const { locationX } = event.nativeEvent;
+    const newTime = Math.round((locationX / 400) * song.duration);
+    dispatch(setCurrentTime(newTime));
   };
 
   if (!song) return null;
@@ -112,11 +125,21 @@ const CurrentSong = () => {
         </TouchableOpacity>
 
         {/* Progress bar */}
-        <View style={styles.progressBar}>
+        <View
+          style={styles.progressBar}
+          onTouchStart={handleRewind}
+          onTouchMove={handleDrag}
+        >
           <View
             style={{
               ...styles.progress,
               width: `${(currentTime / song.duration) * 100}%`,
+            }}
+          />
+          <View
+            style={{
+              ...styles.dot,
+              left: `${(currentTime / song.duration) * 100}%`,
             }}
           />
         </View>
@@ -144,8 +167,23 @@ const CurrentSong = () => {
           <View style={styles.modalBody}>
             <Text style={styles.modalTitle}>{song.title}</Text>
             <Text style={styles.modalArtist}>{song.artist}</Text>
-            <View style={styles.waveform}>
-              {/* Placeholder for waveform */}
+            <View
+              style={styles.progressBar}
+              onTouchStart={handleRewind}
+              onTouchMove={handleDrag}
+            >
+              <View
+                style={{
+                  ...styles.progress,
+                  width: `${(currentTime / song.duration) * 100}%`,
+                }}
+              />
+              <View
+                style={{
+                  ...styles.dot,
+                  left: `${(currentTime / song.duration) * 100}%`,
+                }}
+              />
             </View>
             <View style={styles.timeContainer}>
               <Text style={styles.timeText}>{formatTime(currentTime)}</Text>
@@ -275,6 +313,16 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#fff",
   },
+  dot: {
+    position: "absolute",
+    width: 10,
+    height: 16,
+    backgroundColor: "#fff",
+    borderRadius: 3,
+    borderWidth: 2,
+    borderColor: "#000",
+    top: -6,
+  },
   modalContainer: {
     flex: 1,
     justifyContent: "space-between",
@@ -310,7 +358,7 @@ const styles = StyleSheet.create({
   waveform: {
     width: "100%",
     height: 100,
-    backgroundColor: "#eee",
+    backgroundColor: "#fff",
     marginVertical: 20,
   },
   timeContainer: {

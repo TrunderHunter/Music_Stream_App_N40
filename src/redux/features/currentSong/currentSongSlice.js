@@ -61,11 +61,13 @@ const currentSongSlice = createSlice({
     playRandomSong: (state) => {
       if (state.playlist.length > 0) {
         state.playlist = shuffleArray([...state.playlist]);
-        const randomIndex = Math.floor(Math.random() * state.playlist.length);
-        state.song = state.playlist[randomIndex];
+        state.song = state.playlist[0];
         state.currentTime = 0;
         state.isPlaying = true;
       }
+    },
+    setCurrentTime: (state, action) => {
+      state.currentTime = action.payload;
     },
   },
 });
@@ -79,5 +81,6 @@ export const {
   nextSong,
   prevSong,
   playRandomSong,
+  setCurrentTime,
 } = currentSongSlice.actions;
 export default currentSongSlice.reducer;
