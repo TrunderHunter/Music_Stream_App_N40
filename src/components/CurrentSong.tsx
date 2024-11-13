@@ -6,9 +6,16 @@ import {
   StyleSheet,
   Modal,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
+import {
+  AntDesign,
+  FontAwesome,
+  Entypo,
+  MaterialCommunityIcons,
+  Feather,
+} from "@expo/vector-icons";
 import {
   updateTime,
   closeSong,
@@ -122,11 +129,19 @@ const CurrentSong = () => {
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
+        <ImageBackground
+          style={styles.modalContainer}
+          source={{
+            uri: "https://res.cloudinary.com/dnta8sd9z/image/upload/v1731465209/ReactNative_MusicApp/a53392f0-2d90-48a0-8bfe-0ec9018d1b8b.png",
+          }}
+        >
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalHeaderTitle}>Play</Text>
             <TouchableOpacity onPress={() => setModalVisible(false)}>
-              <FontAwesome name="close" size={24} color="black" />
+              <AntDesign name="down" size={24} color="white" />
             </TouchableOpacity>
+          </View>
+          <View style={styles.modalBody}>
             <Text style={styles.modalTitle}>{song.title}</Text>
             <Text style={styles.modalArtist}>{song.artist}</Text>
             <View style={styles.waveform}>
@@ -140,31 +155,60 @@ const CurrentSong = () => {
               <FontAwesome
                 name="random"
                 size={24}
-                color="gray"
+                color="white"
                 onPress={handleRandom}
               />
               <AntDesign
                 name="stepbackward"
                 size={24}
-                color="gray"
+                color="white"
                 onPress={handlePrev}
               />
               <AntDesign
                 name={isPlaying ? "pausecircleo" : "playcircleo"}
-                size={40}
-                color="gray"
+                size={80}
+                color="white"
                 onPress={() => handlePlayPause()}
               />
               <AntDesign
                 name="stepforward"
                 size={24}
-                color="gray"
+                color="white"
                 onPress={handleNext}
               />
-              <Entypo name="dots-three-horizontal" size={24} color="gray" />
+              <Entypo name="dots-three-horizontal" size={24} color="white" />
+            </View>
+            <View style={styles.socialContainer}>
+              <View style={styles.socialStats}>
+                <AntDesign name="hearto" size={24} color="white" />
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 16,
+                    marginLeft: -10,
+                  }}
+                >
+                  12k
+                </Text>
+                <MaterialCommunityIcons
+                  name="comment-text-outline"
+                  size={24}
+                  color="white"
+                />
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 16,
+                    marginLeft: -10,
+                  }}
+                >
+                  450
+                </Text>
+              </View>
+              <Feather name="upload" size={24} color="white" />
             </View>
           </View>
-        </View>
+        </ImageBackground>
       </Modal>
     </View>
   );
@@ -233,24 +277,35 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
   },
-  modalContent: {
-    width: "90%",
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 20,
-    alignItems: "center",
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    padding: 18,
+  },
+  modalHeaderTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "white",
+  },
+  modalBody: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    padding: 18,
+    paddingBottom: 60,
   },
   modalTitle: {
     fontSize: 24,
     fontWeight: "bold",
+    color: "white",
   },
   modalArtist: {
     fontSize: 18,
-    color: "gray",
+    color: "white",
+    opacity: 0.5,
   },
   waveform: {
     width: "100%",
@@ -265,13 +320,24 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontSize: 16,
-    color: "gray",
+    color: "white",
   },
   modalControls: {
     flexDirection: "row",
     justifyContent: "space-around",
+    alignItems: "center",
     width: "100%",
     marginTop: 20,
+  },
+  socialContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 38,
+  },
+  socialStats: {
+    flexDirection: "row",
+    gap: 20,
   },
 });
 
