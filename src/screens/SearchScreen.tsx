@@ -72,7 +72,20 @@ const SearchScreen = () => {
     },
   ];
 
- 
+  const renderItem = ({ item }) => (
+    <View style={styles.itemContainer}>
+      <Image source={{ uri: item.cover }} style={styles.itemImage} />
+      <View style={styles.itemDetails}>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.itemSubtitle}>
+          {item.artist} • {item.plays} • {item.duration}
+        </Text>
+      </View>
+      <TouchableOpacity>
+        <Ionicons name="ellipsis-vertical" size={20} color="gray" />
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -145,7 +158,28 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: "black",
   },
-  
+  itemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  itemImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 8,
+    marginRight: 10,
+  },
+  itemDetails: {
+    flex: 1,
+  },
+  itemTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  itemSubtitle: {
+    fontSize: 12,
+    color: "gray",
+  },
 });
 
 export default SearchScreen;
