@@ -118,6 +118,12 @@ const SearchScreen = () => {
         ))}
       </View>
       
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.list}
+      />
 
       
     </View>
@@ -157,6 +163,9 @@ const styles = StyleSheet.create({
     color: "black",
     borderBottomWidth: 2,
     borderBottomColor: "black",
+  },
+  list: {
+    paddingBottom: 16,
   },
   itemContainer: {
     flexDirection: "row",
