@@ -91,6 +91,19 @@ const SearchScreen = () => {
         )}
       </View>
 
+      <View style={styles.tabs}>
+        {["All", "Tracks", "Albums", "Artists"].map((tab, index) => (
+          <Text
+            key={index}
+            style={[
+              styles.tab,
+              index === 0 ? styles.activeTab : null, // "All" tab is active
+            ]}
+          >
+            {tab}
+          </Text>
+        ))}
+      </View>
       
 
       
@@ -132,31 +145,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: "black",
   },
-  list: {
-    paddingBottom: 16,
-  },
-  itemContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  itemImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 8,
-    marginRight: 10,
-  },
-  itemDetails: {
-    flex: 1,
-  },
-  itemTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  itemSubtitle: {
-    fontSize: 12,
-    color: "gray",
-  },
+  
 });
 
 export default SearchScreen;
