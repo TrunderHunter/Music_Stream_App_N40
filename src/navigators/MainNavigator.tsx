@@ -6,6 +6,7 @@ import AuthNavigator from "./AuthNavigator";
 import { useSelector } from "react-redux";
 import LibraryScreen from "../screens/LibraryScreen";
 import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
+import SearchScreen from "../screens/SearchScreen";
 
 const MainNavigator = () => {
   const isLoggedIn = useSelector(
@@ -31,7 +32,7 @@ const MainNavigator = () => {
           />
           <Tab.Screen
             name="Search"
-            component={FeedScreen}
+            component={SearchScreen}
             options={{
               tabBarIcon: ({ color }) => (
                 <AntDesign name="search1" size={24} color={color} />
